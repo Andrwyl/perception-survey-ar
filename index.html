@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figure Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 1200px;
+            width: 100%;
+            padding: 40px;
+            position: relative;
+        }
+
+        /* Homepage Styles */
+        .homepage {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .homepage h1 {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+
+        .homepage p {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 50px;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        .start-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 16px 48px;
+            font-size: 1.2em;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .start-button:hover {
+            background: #5568d3;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Figure Gallery Styles */
+        .figure-content {
+            text-align: center;
+        }
+
+        .figure-number {
+            color: #667eea;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .figure-image {
+            width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            background: #f5f5f5;
+            padding: 10px;
+        }
+
+        .figure-text {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .nav-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-button:hover:not(:disabled) {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .page-indicator {
+            color: #666;
+            font-weight: 600;
+        }
+
+        .arrow {
+            font-size: 1.2em;
+        }
+
+        .home-button {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .home-button:hover {
+            background: #5d3a82;
+            transform: translateY(-2px);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="home-button hidden" id="homeBtn" onclick="showHomepage()">← تعليمات</button>
+        
+        <!-- Homepage -->
+        <div class="homepage" id="homepage">
+            <h1>نشكرك على مشاركتك في استطلاعنا!</h1>
+            <h2>وهنا التعليمات<br></h2>
+            <p><br>ستظهر لك ١٠ أرقام. يحتوي كل رقم على ٤ أعمدة بيانية توضح نفس المعلومات.</p>
+            <p>سيحتوي كل شكل على سؤالين أيضًا. لكل شكل، ضع إجابة السؤالين ١ و٢ في القسم المخصص لهما من ورقة الإجابة.</p>
+            <p>يمكنك التنقل ذهابًا وإيابًا خلال الاستبيان إذا رغبت في ذلك. سيعيدك زر التعليمات في أعلى اليسار إلى هذه الصفحة.</p>
+            <p>يرجى حفظ نموذج الإجابة المكتمل وإرساله بالبريد الإلكتروني إليّ عند الانتهاء منه.</p>
+            
+            <button class="start-button" onclick="startGallery()">يبدأ!</button>
+            
+        </div>
+
+        <!-- Figure Gallery -->
+        <div class="figure-content hidden" id="gallery">
+            <div class="figure-number" id="figureNumber">Figure 1</div>
+            <img src="" alt="Figure" class="figure-image" id="figureImage">
+            <div class="figure-text" id="figureText">
+                This is the description for Figure 1. Replace this text with your own description for each figure.
+            </div>
+        
+            <div class="navigation">
+                <button class="nav-button" id="prevBtn" onclick="previousFigure()">
+                    <span class="arrow">←</span> Previous
+                </button>
+                <div class="page-indicator" id="pageIndicator">1 / 10</div>
+                <button class="nav-button" id="nextBtn" onclick="nextFigure()">
+                    Next <span class="arrow">→</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+
+        const figures = [
+            {
+                image: "bar_graphs/0.png",
+                text: 'السؤال 1: صحيح أم خطأ، متوسط ​​الطول في كندا أعلى من متوسط ​​الطول في الولايات المتحدة؟<br>السؤال 2: ما هو الشكل الذي يجعل العبارة "فرنسا لديها ثاني أكبر متوسط ​​طول" أكثر وضوحًا؟'
+            },
+            {
+                image: "bar_graphs/1.png",
+                text: 'السؤال 1: صحيح أم خطأ، مبيعات أجهزة الكمبيوتر المحمولة أكثر شهريًا من مبيعات الشاشات؟<br>السؤال 2: ما هو الشكل الذي يجعل العبارة "لوحات المفاتيح لديها أدنى مبيعات شهرية" أكثر وضوحًا؟'
+            },
+            {
+                image: "bar_graphs/2.png",
+                text: 'السؤال 1: صحيح أو خطأ، الفئة العمرية 10-19 سنة تقضي أكثر من 6 ساعات أمام الشاشة؟<br>السؤال 2: ما الشكل الذي يجعل العبارة "الفئة العمرية 20-29 عامًا لديها أعلى متوسط ​​وقت شاشة بشكل أكثر وضوحًا"؟'
+            },
+            {
+                image: "bar_graphs/3.png",
+                text: 'السؤال 1: صحيح أم خطأ، الموسيقى لها درجة اختبار أعلى من الفن؟<br>السؤال 2: ما الشكل الذي يجعل العبارة "العلوم لديها ثاني أدنى درجة اختبار" أكثر وضوحًا؟'
+            },
+            {
+                image: "bar_graphs/4.png",
+                text: 'السؤال 1: صحيح أو خطأ، متوسط ​​درجة الحرارة في لندن أكثر من 14؟<br>السؤال 2: ما هو الشكل الذي يجعل العبارة التي تقول أن سيدني لديها أعلى متوسط ​​درجة حرارة أكثر وضوحًا؟'
+            },
+            {
+                image: "bar_graphs/5.png",
+                text: 'السؤال 1: صحيح أم خطأ، البرازيل أكثر سكانًا من الولايات المتحدة الأمريكية؟<br>السؤال 2: ما هو الرقم الذي يجعل بيان أن الولايات المتحدة لديها ثالث أكبر عدد من السكان أكثر وضوحًا؟'
+            },
+            {
+                image: "bar_graphs/6.png",
+                text: 'السؤال 1: صحيح أو خطأ، الفئة العمرية 70-79 تمارس الرياضة أكثر من 2.5 ساعة في الأسبوع؟<br>السؤال 2: ما الشكل الذي يجعل العبارة "الفئة العمرية 70-79 عامًا لديها ثاني أقل متوسط ​​لوقت التمرين بشكل واضح"؟'
+            },
+            {
+                image: "bar_graphs/7.png",
+                text: 'السؤال 1: صحيح أو خطأ، متوسط ​​سرعة الإنترنت في اليابان أعلى من الولايات المتحدة؟<br>السؤال 2: ما هي الأرقام التي تجعل بيان أن كوريا الجنوبية لديها أعلى متوسط ​​سرعة للإنترنت أكثر وضوحًا؟'
+            },
+            {
+                image: "bar_graphs/8.png",
+                text: 'السؤال 1: صحيح أم خطأ، معدل البطالة في ألمانيا أعلى من اليابان؟<br>السؤال 2: ما هو الرقم الذي يجعل العبارة "إسبانيا لديها أعلى معدل بطالة" أكثر وضوحًا؟'
+            },
+            {
+                image: "bar_graphs/9.png",
+                text: 'السؤال 1: صحيح أم خطأ، المهندسون يكسبون في المتوسط ​​أكثر من المحاسبين؟<br>السؤال 2: ما هو الرقم الذي يجعل العبارة "الفنانون لديهم أدنى متوسط ​​راتب" أكثر وضوحًا؟'
+            }
+        ];
+
+        function startGallery() {
+            document.getElementById('homepage').classList.add('hidden');
+            document.getElementById('gallery').classList.remove('hidden');
+            document.getElementById('homeBtn').classList.remove('hidden');
+            currentIndex = 0;
+            updateDisplay();
+        }
+
+        function showHomepage() {
+            document.getElementById('homepage').classList.remove('hidden');
+            document.getElementById('gallery').classList.add('hidden');
+            document.getElementById('homeBtn').classList.add('hidden');
+        }
+
+        function updateDisplay() {
+            const figure = figures[currentIndex];
+            document.getElementById('figureNumber').textContent = `Figure ${currentIndex + 1}`;
+            document.getElementById('figureImage').src = figure.image;
+            document.getElementById('figureText').innerHTML = figure.text;
+            document.getElementById('pageIndicator').textContent = `${currentIndex + 1} / ${figures.length}`;
+            
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('nextBtn').disabled = currentIndex === figures.length - 1;
+        }
+
+        function nextFigure() {
+            if (currentIndex < figures.length - 1) {
+                currentIndex++;
+                updateDisplay();
+            }
+        }
+
+        function previousFigure() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateDisplay();
+            }
+        }
+    </script>
+</body>
+</html>
